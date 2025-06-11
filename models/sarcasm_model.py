@@ -3,12 +3,12 @@ import torch
 import torch.nn.functional as F
 
 # Load model và tokenizer từ thư mục đã huấn luyện
-model = AutoModelForSequenceClassification.from_pretrained("./results/sentiment_predict_model")
-tokenizer = AutoTokenizer.from_pretrained("./results/sentiment_predict_model")
+model = AutoModelForSequenceClassification.from_pretrained("./results/sarcasm_model")
+tokenizer = AutoTokenizer.from_pretrained("./results/sarcasm_model")
 model.eval()
 
 
-def predict_sentiment(text):
+def predict_sarcasm(text):
     # Token hóa input
     predicted_class = "default"
     inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
@@ -22,16 +22,14 @@ def predict_sentiment(text):
     # Đưa vào mô hình
     with torch.no_grad():
         outputs = model(**inputs)
-        logits = outputs.logits  # Now outputs should have logits attribute
+        logits = outputs.logits # Now outputs should have logits attribute
         probs = F.softmax(logits, dim=-1)
         predicted_label = torch.argmax(probs, dim=-1).item()
 
     match predicted_label:
         case 0:
-            predicted_class = "Tiêu cực"
+            predicted_class = "Bình thường"
         case 1:
-            predicted_class = "Trung lập"
-        case 2:
-            predicted_class = "Tích cực"
+            predicted_class = "Mỉa mai"
 
     return predicted_class, probs.squeeze()[predicted_label]

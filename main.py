@@ -5,6 +5,6 @@ app = FastAPI(title="NLP API")
 
 # Đăng ký router
 app.include_router(sentiment.router, prefix="/sentiment", tags=["Sentiment"])
-# app.include_router(sarcasm.router, prefix="/sarcasm", tags=["Sarcasm"])
+app.include_router(sarcasm.router, prefix="/sarcasm", tags=["Sarcasm"])
 # app.include_router(field_classify.router, prefix="/field", tags=["Field Classification"])
 # app.include_router(clause_split.router, prefix="/clustering", tags=["Clustering"])
