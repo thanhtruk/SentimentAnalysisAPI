@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from schemas.sentiment import SentimentRequest, SentimentResponse
-from models.sentiment_model import predict_sentiment
+from services.sentiment_service import predict_sentiment
 
 router = APIRouter()
 

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from schemas.sarcasm import SarcasmResponse, SarcasmRequest
-from models.sarcasm_model import predict_sarcasm
+from services.sarcasm_service import predict_sarcasm
 
 router = APIRouter()
 
