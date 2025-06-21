@@ -6,5 +6,5 @@ class SarcasmRequest(BaseModel):
 
 
 class SarcasmResponse(BaseModel):
-    is_sarcasm: str
+    is_sarcasm: bool
     probability: float

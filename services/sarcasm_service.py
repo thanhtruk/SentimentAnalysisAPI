@@ -1,3 +1,4 @@
+
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import torch.nn.functional as F
@@ -10,7 +11,6 @@ model.eval()
 
 def predict_sarcasm(text):
     # Token hóa input
-    predicted_class = "default"
     inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
 
     # Move input tensors and model to the same device
@@ -28,8 +28,8 @@ def predict_sarcasm(text):
 
     match predicted_label:
         case 0:
-            predicted_class = "Bình thường"
+            is_sarcasm = False
         case 1:
-            predicted_class = "Mỉa mai"
+            is_sarcasm = True
 
-    return predicted_class, probs.squeeze()[predicted_label]
+    return is_sarcasm, probs.squeeze()[predicted_label]

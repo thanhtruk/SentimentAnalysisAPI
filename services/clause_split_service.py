@@ -72,8 +72,7 @@ def split_clauses(words, pos_tags, min_clause_len=2):
     splits = []
     clauses = []
 
-    conjunction_tags = {"C", "E"}  # liên từ
-    punctuation_tags = {"CH"}  # dấu câu
+    conjunction_tags = {"C"}  # liên từ
 
     prev_split = 0
     i = 1
