@@ -120,7 +120,11 @@ def process_text(text):
     all_clauses = []
 
     for sentence in sentences:
-        annotations = model.annotate_text(sentence)
+        try:
+            annotations = model.annotate_text(sentence)
+        except Exception as e:
+            print(f"Lỗi khi phân tích câu: {sentence}")
+            print(e)
         print(annotations)
         if not isinstance(annotations, dict):
             print("not dic")

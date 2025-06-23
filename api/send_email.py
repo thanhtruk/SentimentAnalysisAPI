@@ -1,4 +1,4 @@
-from http.client import HTTPException
+from fastapi import HTTPException
 
 from fastapi import APIRouter
 from schemas.send_email import EmailRequest
@@ -9,7 +9,14 @@ router = APIRouter()
 
 @router.post("/send-email")
 def send_email_api(request: EmailRequest):
-    result = send_email(request.recipient_email, request.message)
-    if result["status"] == "error":
-        raise HTTPException()
-    return result
+    try:
+        result = send_email(request.recipient_email, request.subject, request.message)
+
+        if result["status"] == "error":
+            raise Exception(result["detail"])
+
+        return result
+
+    except Exception as e:
+        print(f"Lỗi nội bộ khi gửi email: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
