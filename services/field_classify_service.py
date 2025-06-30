@@ -6,19 +6,17 @@ with open("data/field_keywords.txt", "r", encoding="utf-8") as f:
 
 
 def detect_fields_in_text(text: str) -> tuple:
-    text_lower = text.lower()
     matched_fields = {}
 
     for field, keywords in keyword_dict.items():
         contained_keywords = []
         for kw in keywords:
             pattern = re.escape(kw.lower())
-            if re.search(rf"\b{pattern}\b", text_lower):
+            if re.search(rf"\b{pattern}\b", text):
                 contained_keywords.append(kw)
         if contained_keywords:
             matched_fields[field] = contained_keywords
 
-    # Sắp xếp theo số lượng keyword khớp giảm dần
     sorted_matched = sorted(
         matched_fields.items(), key=lambda item: len(item[1]), reverse=True
     )
