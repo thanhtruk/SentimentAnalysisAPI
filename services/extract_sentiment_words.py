@@ -9,6 +9,7 @@ def split_text_into_sentences(text):
 
 from collections import Counter, OrderedDict
 
+
 def extract_adj(text: str) -> dict:
     sentences = split_text_into_sentences(text)
     extracted_phrases = []
@@ -29,7 +30,6 @@ def extract_adj(text: str) -> dict:
             current_pos = None
 
             for tok in token_list:
-                # Thay dấu _ bằng khoảng trắng
                 word = tok["wordForm"].replace("_", " ")
                 pos = tok["posTag"]
 
